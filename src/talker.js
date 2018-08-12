@@ -12,13 +12,10 @@ var express = require('express');
 var app = express();
 app.use(parser.urlencoded({ extended: true }));
 app.use(parser.json());
+app.use(express.static('../html'));
 
 var server = app.listen(PORT, function() {
   console.log('start talker. listening port is ' + server.address().port);
-});
-
-app.get('/api/talk', function(req, res, next) {
-  googlehome.notify(req.text, function(){});
 });
 
 app.post('/', function(req, res) {
@@ -60,3 +57,9 @@ app.post('/talk', function(req, res) {
   googlehome.notify(req.body.value1, function(){});
   res.send('done');
 });
+
+//app.post('/post', function(req, res) {
+//  console.log("common");
+//  googlehome.notify(req.body.value1, function(){});
+//  res.send('done');
+//});
